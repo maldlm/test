@@ -1,10 +1,83 @@
-console.log('hee this is test dlaim 5');
+console.log('hee this is test dlaim 6');
 
-// const intervalId = setInterval(() => {
-//   console.log('run4...');
-//   const xBtn = document.getElementById('review-order-confirm-button-bottom');
-//   if (xBtn) {
-//     xBtn.style.setProperty('background-color', 'blue', 'important');
-//     clearInterval(intervalId);
-//   }
-// }, 100);
+function handleNavigation(url) {
+    const parsedUrl = new URL(url);
+    console.log('Current pathname:', parsedUrl.pathname);
+
+    if (parsedUrl.pathname === '/cart/view') {
+        console.log('User is viewing the cart!');
+        
+        const giftSectionIntervalId = setInterval(() => {
+            console.log('looking for gift...');
+            const giftCardSection = document.getElementById('showGiftCard');
+            if (giftCardSection) {
+                giftCardSection.classList.add('show');
+                clearInterval(giftSectionIntervalId);
+            }
+        }, 1000);
+    } else if (parsedUrl.pathname === '/checkout/choose-address-and-shipping/consignee') {
+        let streetInput;
+        let districtInput;
+
+        const deliveryInputsIntervalId = setInterval(() => {
+            console.log('looking for address...');
+            streetInput = document.getElementById('street');
+            districtInput = document.getElementById('region');
+            if (streetInput && districtInput) {
+                streetInput.parentElement.style.setProperty('opacity', 0.1);
+                districtInput.parentElement.style.setProperty('opacity', 0.1);
+
+                const saveBtn = document.getElementsByClassName('btn round primary')[0];
+
+                let clicked = false;
+                saveBtn.addEventListener('click', function() {
+                    if (clicked) return;
+                    clicked = true;
+                    
+                    console.log('Button was clicked!');
+                    streetInput.value = 'n/a';
+                    districtInput.value = 'n/a';
+
+                    var streetInputEvent = new Event('input', {
+                        bubbles: true,
+                        cancelable: true,
+                    });
+                    streetInput.dispatchEvent(streetInputEvent);
+
+                    var streetInputChangeEvent = new Event('change', {
+                        bubbles: true,
+                        cancelable: true,
+                    });
+                    streetInput.dispatchEvent(streetInputChangeEvent);
+
+                    var districtInputEvent = new Event('input', {
+                        bubbles: true,
+                        cancelable: true,
+                    });
+                    districtInput.dispatchEvent(districtInputEvent);
+
+                    var districtInputChangeEvent = new Event('change', {
+                        bubbles: true,
+                        cancelable: true,
+                    });
+                    districtInput.dispatchEvent(districtInputChangeEvent);
+
+                    saveBtn.click();
+                });
+
+                clearInterval(deliveryInputsIntervalId);
+            }
+        }, 1000);
+    }
+}
+
+if (window.navigation && window.navigation.addEventListener) {
+    window.navigation.addEventListener("navigate", (event) => {
+        console.log('Location changed!', event);
+        if (event.destination && event.destination.url) {
+            handleNavigation(event.destination.url);
+        }
+    });
+}
+
+handleNavigation(window.location.href);
