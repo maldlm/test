@@ -1,4 +1,7 @@
-console.log('hee this is test dlaim 6');
+console.log('hee this is test dlaim 7');
+
+let giftSectionIntervalId;
+let deliveryInputsIntervalId;
 
 function handleNavigation(url) {
     const parsedUrl = new URL(url);
@@ -7,7 +10,7 @@ function handleNavigation(url) {
     if (parsedUrl.pathname === '/cart/view') {
         console.log('User is viewing the cart!');
         
-        const giftSectionIntervalId = setInterval(() => {
+        giftSectionIntervalId = setInterval(() => {
             console.log('looking for gift...');
             const giftCardSection = document.getElementById('showGiftCard');
             if (giftCardSection) {
@@ -19,13 +22,13 @@ function handleNavigation(url) {
         let streetInput;
         let districtInput;
 
-        const deliveryInputsIntervalId = setInterval(() => {
+        deliveryInputsIntervalId = setInterval(() => {
             console.log('looking for address...');
             streetInput = document.getElementById('street');
             districtInput = document.getElementById('region');
             if (streetInput && districtInput) {
-                streetInput.parentElement.style.setProperty('opacity', 0.1);
-                districtInput.parentElement.style.setProperty('opacity', 0.1);
+                streetInput.parentElement.style.setProperty('display', 'none');
+                districtInput.parentElement.style.setProperty('display', 'none');
 
                 const saveBtn = document.getElementsByClassName('btn round primary')[0];
 
@@ -68,6 +71,9 @@ function handleNavigation(url) {
                 clearInterval(deliveryInputsIntervalId);
             }
         }, 1000);
+    } else {
+        if (giftSectionIntervalId) clearInterval(giftSectionIntervalId);
+        if (deliveryInputsIntervalId) clearInterval(deliveryInputsIntervalId);
     }
 }
 
