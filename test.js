@@ -1,4 +1,4 @@
-console.log('hee this is test dlaim 7');
+console.log('hee this is test dlaim 8');
 
 let giftSectionIntervalId;
 let deliveryInputsIntervalId;
@@ -34,38 +34,39 @@ function handleNavigation(url) {
 
                 let clicked = false;
                 saveBtn.addEventListener('click', function() {
-                    if (clicked) return;
-                    clicked = true;
-                    
-                    console.log('Button was clicked!');
-                    streetInput.value = 'n/a';
-                    districtInput.value = 'n/a';
+                    if (!clicked) {
+                        clicked = true;
+                        
+                        console.log('Button was clicked!');
+                        streetInput.value = 'n/a';
+                        districtInput.value = 'n/a';
 
-                    var streetInputEvent = new Event('input', {
-                        bubbles: true,
-                        cancelable: true,
-                    });
-                    streetInput.dispatchEvent(streetInputEvent);
+                        var streetInputEvent = new Event('input', {
+                            bubbles: true,
+                            cancelable: true,
+                        });
+                        streetInput.dispatchEvent(streetInputEvent);
 
-                    var streetInputChangeEvent = new Event('change', {
-                        bubbles: true,
-                        cancelable: true,
-                    });
-                    streetInput.dispatchEvent(streetInputChangeEvent);
+                        var streetInputChangeEvent = new Event('change', {
+                            bubbles: true,
+                            cancelable: true,
+                        });
+                        streetInput.dispatchEvent(streetInputChangeEvent);
 
-                    var districtInputEvent = new Event('input', {
-                        bubbles: true,
-                        cancelable: true,
-                    });
-                    districtInput.dispatchEvent(districtInputEvent);
+                        var districtInputEvent = new Event('input', {
+                            bubbles: true,
+                            cancelable: true,
+                        });
+                        districtInput.dispatchEvent(districtInputEvent);
 
-                    var districtInputChangeEvent = new Event('change', {
-                        bubbles: true,
-                        cancelable: true,
-                    });
-                    districtInput.dispatchEvent(districtInputChangeEvent);
+                        var districtInputChangeEvent = new Event('change', {
+                            bubbles: true,
+                            cancelable: true,
+                        });
+                        districtInput.dispatchEvent(districtInputChangeEvent);
 
-                    saveBtn.click();
+                        saveBtn.click();
+                    }
                 });
 
                 clearInterval(deliveryInputsIntervalId);
